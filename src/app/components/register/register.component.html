@@ -1,0 +1,67 @@
+<div class="container">
+
+  <div class="image">
+  </div>
+
+  <div class="mainRow">
+
+    <mat-card class="registerForm">
+      <div class="formHeader">
+        <mat-card-title>ToDos</mat-card-title>
+      </div>
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput [formControl]="fname" required>
+          <mat-error *ngIf="fname.hasError('required')">Please enter your first name</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput [formControl]="lname" required>
+          <mat-error *ngIf="lname.hasError('required')">Please enter your last name</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput [formControl]="email" required>
+          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="email.hasError('required')">
+            Please enter an email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput [formControl]="username" required>
+          <mat-error *ngIf="username.hasError('required')">Please enter a username</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput [formControl]="password" required>
+          <mat-error *ngIf="password.hasError('required')">Please enter a password</mat-error>
+          <mat-error *ngIf="password.hasError('minlength')">Minimum password length: 5 characters</mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <div class="formRow">
+        <button mat-raised-button color="primary" id="btnLogin" (click)="registerFunction()">Register</button>
+      </div>
+
+      <span>Already a user?</span>
+      <button mat-button color="primary" [routerLink]="['/login']">Login</button>
+
+    </mat-card>
+  </div>
+</div>

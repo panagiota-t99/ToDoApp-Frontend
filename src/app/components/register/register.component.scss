@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("./background-sticky-notes.jpg");
+
+
+  .mainRow {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    height: 550px;
+
+
+
+
+
+    .registerForm {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      background-color:  #eceef8;
+
+      .formHeader {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        color: darkslateblue;
+      }
+
+      .formRow {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 200px;
+
+      }
+    }
+  }
+}

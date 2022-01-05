@@ -1,0 +1,54 @@
+<div class="container">
+
+  <mat-table mat-table [dataSource]="userSource"
+             class="mat-elevation-z0">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>UserId</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="roleid">
+      <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roleid}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="edit" color="accent"
+                (click)="editUserDialog(element.id,element.firstname,element.lastname,element.email,element.username,element.roleid)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="delete" color="warn" (click)="deleteUserDialog(element.id)"
+                [disabled]="element.id == userid">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsUsers sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsUsers;" matRipple class="list-row"></mat-row>
+  </mat-table>
+
+</div>

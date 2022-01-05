@@ -1,0 +1,40 @@
+<body class="background">
+<div class="container">
+
+  <div class="mainRow">
+
+    <mat-card class="loginForm">
+      <div class="formHeader">
+        <mat-card-title>ToDos</mat-card-title>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput [formControl]="username" required>
+          <mat-error *ngIf="username.hasError('required')">Please enter your username</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="formRow">
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput [formControl]="password" required [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.hasError('required')">Please enter your password</mat-error>
+        </mat-form-field>
+      </div>
+      <br>
+      <div class="formRow">
+        <button mat-raised-button color="primary" id="btnLogin" (click)="loginFunction()">Login</button>
+      </div>
+      <span>Not registered yet?</span>
+      <button mat-button color="primary" [routerLink]="['/register']">Create an Account</button>
+
+    </mat-card>
+  </div>
+</div>
+</body>

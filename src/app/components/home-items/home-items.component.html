@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="preHeader">
+    <mat-form-field style="margin-right: 10px;">
+      <mat-label>
+        Search
+      </mat-label>
+      <input matInput (keydown)="search($event)">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" aria-label="additem" (click)="openDialogAddItem()">
+      <mat-icon>library_add</mat-icon>
+    </button>
+  </div>
+
+  <mat-table mat-table [dataSource]="itemSource"
+             class="mat-elevation-z0">
+    <ng-container matColumnDef="itemname">
+      <mat-header-cell *matHeaderCellDef>{{listname}}</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.itemname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCreated">
+      <mat-header-cell *matHeaderCellDef> Date Created</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateModified">
+      <mat-header-cell *matHeaderCellDef> Date Modified</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateModified}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
+                (click)="openDialogItem(element.itemsid,element.itemname)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="delete" color="warn"
+                (click)="openDialogDeleteItem(element.itemsid,element.itemname)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsItems"></mat-header-row>
+    <mat-row mat-row *matRowDef="let row; columns: displayedColumnsItems;" matRipple class="list-row"></mat-row>
+  </mat-table>
+
+</div>
+

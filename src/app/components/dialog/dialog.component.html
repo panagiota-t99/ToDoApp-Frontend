@@ -1,0 +1,15 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<h3>{{data.title}}</h3>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.name" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close [disabled]=" data.name===''"
+          [mat-dialog-close]="data.name">{{data.action}}
+  </button>
+</mat-dialog-actions>
+

@@ -1,0 +1,43 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<h3>Edit user information</h3>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput [(ngModel)]="data.firstname" required>
+  </mat-form-field>
+
+  <mat-form-field class="second">
+    <mat-label>Last name</mat-label>
+    <input matInput [(ngModel)]="data.lastname" required>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="data.email" required>
+  </mat-form-field>
+
+  <mat-form-field class="second">
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="data.username" required>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class="role">
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="selectedValue" [value]="roles[data.roleid].value" required>
+      <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{role.value}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="[data,selectedValue]">Update</button>
+</mat-dialog-actions>
+

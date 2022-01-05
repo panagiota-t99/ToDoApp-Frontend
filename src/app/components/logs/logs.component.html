@@ -1,0 +1,39 @@
+<div class="container">
+
+  <mat-table mat-table [dataSource]="logSource"
+             class="mat-elevation-z0">
+    <ng-container matColumnDef="logid">
+      <mat-header-cell *matHeaderCellDef>LogId</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.logid}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.action}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="message">
+      <mat-header-cell *matHeaderCellDef>Message</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.message}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCreated">
+      <mat-header-cell *matHeaderCellDef> Date Created</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsLogs sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsLogs;" matRipple class="list-row"></mat-row>
+  </mat-table>
+
+</div>

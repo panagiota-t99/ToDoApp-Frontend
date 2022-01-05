@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="preHeader">
+    <mat-form-field style="margin-right: 10px;">
+      <mat-label>
+        Search
+      </mat-label>
+      <input matInput (keydown)="search($event)">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" aria-label="addlist" (click)="openDialogAddList()">
+      <mat-icon>note_add</mat-icon>
+    </button>
+  </div>
+
+  <mat-table [dataSource]="listSource" class="mat-elevation-z0">
+    <ng-container matColumnDef="listid">
+      <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.listid}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="listname">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.listname}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="dateCreated">
+      <mat-header-cell *matHeaderCellDef> Date Created</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateCreated}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="dateModified">
+      <mat-header-cell *matHeaderCellDef> Date Modified</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dateModified}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+        <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
+                (click)="openDialogList(element.listid,element.listname)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="delete" color="warn"
+                (click)="openDialogDeleteList(element.listid,element.listname)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsLists"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsLists;" class="list-row" (click)="getRecord(row)"></mat-row>
+  </mat-table>
+  <br>
+
+</div>
+
+
+
+
+
+
+
