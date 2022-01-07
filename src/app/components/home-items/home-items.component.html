@@ -11,6 +11,7 @@
     </button>
   </div>
 
+  <div fxLayout="column" fxHide fxShow.gt-sm class="table-container">
   <mat-table mat-table [dataSource]="itemSource"
              class="mat-elevation-z0">
     <ng-container matColumnDef="itemname">
@@ -42,9 +43,39 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumnsItems"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumnsItems sticky:true"></mat-header-row>
     <mat-row mat-row *matRowDef="let row; columns: displayedColumnsItems;" matRipple class="list-row"></mat-row>
   </mat-table>
+  </div>
+
+  <div class="card-container" fxLayout="column" fxHide fxShow.lt-md >
+    <h4 style="padding-left: 15px;">{{listname}}</h4>
+    <div *ngFor="let item of cardSource" >
+      <mat-card>
+        <div>Id: {{item.itemsid}}</div>
+        <div>Name: {{item.itemname}}</div>
+        <div>Date Created: {{item.dateCreated}}</div>
+        <div>Date Modified: {{item.dateModified}}</div>
+        <div>
+          <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
+                  (click)="openDialogItem(item.itemsid,item.itemname)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="delete" color="warn"
+                  (click)="openDialogDeleteItem(item.itemsid,item.itemname)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+
+
+
+
+
+
 
 </div>
 

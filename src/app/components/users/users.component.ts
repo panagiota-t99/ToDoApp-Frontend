@@ -13,6 +13,7 @@ import {DialogDeleteComponent} from "../dialog-delete/dialog-delete.component";
 export class UsersComponent implements OnInit {
   displayedColumnsUsers: string[] = ['id', 'firstname', 'lastname', 'email', 'username', 'roleid', 'action'];
   userSource: any;
+  cardSource: any;
   userid: any;
 
   constructor(private userService: UserService, public dialog: MatDialog) {
@@ -35,6 +36,7 @@ export class UsersComponent implements OnInit {
         }
       }
       this.userSource = new MatTableDataSource<UserElement>(users);
+      this.cardSource = this.userSource.data;
     } catch ({message}) {
       alert(message);
     }

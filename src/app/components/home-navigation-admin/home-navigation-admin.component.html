@@ -6,8 +6,11 @@
       inline=true>person</mat-icon> Users</button></span>
     <span><button mat-flat-button color="primary" [routerLink]="['/home/admin/logs']"><mat-icon
       inline=true>folder</mat-icon> Logs</button></span>
-    <span><button mat-flat-button color="primary" (click)="logout()"><mat-icon
+    <span fxHide fxShow.gt-sm><button mat-flat-button color="primary" (click)="logout()"><mat-icon
       inline=true>logout</mat-icon> Logout</button></span>
   </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
+<div fxLayoutAlign="end" style="padding-right: 25px; padding-top: 25px;"><button fxHide fxShow.lt-md mat-fab color="primary" (click)="logout()" ><mat-icon
+  inline=true>logout</mat-icon></button></div>
+

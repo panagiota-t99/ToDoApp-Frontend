@@ -1,5 +1,6 @@
 <div class="container">
 
+  <div fxLayout="column" fxHide fxShow.gt-sm class="table-container">
   <mat-table mat-table [dataSource]="logSource"
              class="mat-elevation-z0">
     <ng-container matColumnDef="logid">
@@ -35,5 +36,20 @@
     <mat-header-row *matHeaderRowDef="displayedColumnsLogs sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumnsLogs;" matRipple class="list-row"></mat-row>
   </mat-table>
+    </div>
+
+  <div class="card-container" fxLayout="column" fxHide fxShow.lt-md >
+    <div *ngFor="let log of cardSource" >
+      <mat-card>
+        <div>LogId: {{log.logid}}</div>
+        <div>First Name: {{log.firstname}}</div>
+        <div>Last Name: {{log.lastname}}</div>
+        <div>Action: {{log.action}}</div>
+        <div>Message: {{log.message}}</div>
+        <div>Date Created: {{log.dateCreated}}</div>
+      </mat-card>
+    </div>
+  </div>
+
 
 </div>

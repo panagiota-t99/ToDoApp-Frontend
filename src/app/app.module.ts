@@ -33,6 +33,7 @@ import { DialogUserComponent } from './components/dialog-user/dialog-user.compon
 import {MatSelectModule} from "@angular/material/select";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 
@@ -71,6 +72,7 @@ import { environment } from '../environments/environment';
         MatExpansionModule,
         MatDialogModule,
         MatToolbarModule,
+        FlexLayoutModule,
         MatSelectModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: environment.production,

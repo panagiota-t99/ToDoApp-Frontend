@@ -18,6 +18,7 @@ import {formatDate} from "@angular/common";
 export class HomeComponent implements OnInit {
   listSource: any;
   displayedColumnsLists = ['listid', 'listname', 'dateCreated', 'dateModified', 'action'];
+  cardSource: any;
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog, public deleteDialog: MatDialog) {
   }
@@ -104,6 +105,7 @@ export class HomeComponent implements OnInit {
           list.dateCreated = formatDate(list.dateCreated, 'dd-MM-yyyy', 'en-US');
         }
         this.listSource = new MatTableDataSource<ListElement>(lists);
+        this.cardSource = this.listSource.data;
       }
     } catch ({message}) {
       alert(message);
@@ -124,6 +126,9 @@ export class HomeComponent implements OnInit {
     } catch (e) {}
   }
 
+  getRecordCard(list:any){
+    console.log(list);
+  }
 
   search($event: KeyboardEvent) {
     // @ts-ignore

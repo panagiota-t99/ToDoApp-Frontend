@@ -1,5 +1,6 @@
 <div class="container">
 
+  <div fxLayout="column" fxHide fxShow.gt-sm class="table-container">
   <mat-table mat-table [dataSource]="userSource"
              class="mat-elevation-z0">
 
@@ -50,5 +51,33 @@
     <mat-header-row *matHeaderRowDef="displayedColumnsUsers sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumnsUsers;" matRipple class="list-row"></mat-row>
   </mat-table>
+  </div>
+
+
+  <div class="card-container" fxLayout="column" fxHide fxShow.lt-md >
+    <div *ngFor="let user of cardSource" >
+      <mat-card>
+        <div>UserId: {{user.id}}</div>
+        <div>First Name: {{user.firstname}}</div>
+        <div>Last Name: {{user.lastname}}</div>
+        <div>Email: {{user.email}}</div>
+        <div>Username: {{user.username}}</div>
+        <div>Role: {{user.roleid}}</div>
+
+
+        <div>
+        <button mat-icon-button aria-label="edit" color="accent"
+                (click)="editUserDialog(user.id,user.firstname,user.lastname,user.email,user.username,user.roleid)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="delete" color="warn" (click)="deleteUserDialog(user.id)"
+                [disabled]="user.id == userid">
+          <mat-icon>delete</mat-icon>
+        </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
 
 </div>

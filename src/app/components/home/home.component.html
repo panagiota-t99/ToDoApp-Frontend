@@ -11,7 +11,8 @@
     </button>
   </div>
 
-  <mat-table [dataSource]="listSource" class="mat-elevation-z0">
+  <div fxLayout="column" fxHide fxShow.gt-sm class="table-container">
+  <mat-table [dataSource]="listSource" class="mat-elevation-z0" >
     <ng-container matColumnDef="listid">
       <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.listid}} </mat-cell>
@@ -36,7 +37,7 @@
     </ng-container>
 
 
-    <ng-container matColumnDef="action">
+    <ng-container matColumnDef="action" stickyEnd>
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
         <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
@@ -50,11 +51,32 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumnsLists"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumnsLists;" class="list-row" (click)="getRecord(row)"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumnsLists sticky:true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsLists;" (click)="getRecord(row)"></mat-row>
   </mat-table>
-  <br>
+  </div>
 
+
+<div class="card-container" fxLayout="column" fxHide fxShow.lt-md >
+  <div *ngFor="let list of cardSource" >
+  <mat-card (click)="getRecord(list)">
+    <div>Id: {{list.listid}}</div>
+    <div>Name: {{list.listname}}</div>
+    <div>Date Created: {{list.dateCreated}}</div>
+    <div>Date Modified: {{list.dateModified}}</div>
+    <div (click)="$event.stopPropagation()">
+      <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
+              (click)="openDialogList(list.listid,list.listname)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="delete" color="warn"
+              (click)="openDialogDeleteList(list.listid,list.listname)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+  </div>
+</div>
 </div>
 
 

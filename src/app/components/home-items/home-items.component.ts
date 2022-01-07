@@ -20,6 +20,7 @@ export class HomeItemsComponent implements OnInit {
 
   displayedColumnsItems: string[] = ['itemname', 'dateCreated', 'dateModified', 'action'];
   itemSource: any;
+  cardSource: any;
 
   constructor(private router: Router, private userService: UserService, public dialog: MatDialog, public deleteDialog: MatDialog) {
   }
@@ -42,6 +43,7 @@ export class HomeItemsComponent implements OnInit {
           item.dateCreated = formatDate(item.dateCreated, 'dd-MM-yyyy', 'en-US');
         }
         this.itemSource = new MatTableDataSource<ItemElement>(items);
+        this.cardSource = this.itemSource.data;
       }
     } catch ({message}) {
       alert(message);

@@ -12,6 +12,7 @@ export class LogsComponent implements OnInit {
 
   displayedColumnsLogs!: string[];
   logSource: any;
+  cardSource: any;
 
   constructor(private userService: UserService) {
   }
@@ -34,6 +35,7 @@ export class LogsComponent implements OnInit {
           log.dateCreated = formatDate(log.dateCreated, 'dd-MM-yyyy hh:mm:ss', 'en-US');
         }
         this.logSource = new MatTableDataSource<LogElement>(logs);
+        this.cardSource = this.logSource.data;
       }
     } catch ({message}) {
       alert(message);
