@@ -84,7 +84,7 @@ export class HomeItemsComponent implements OnInit {
       if (result != true) //closed by update
       {
         try {
-          let res = await this.userService.updateItemName(itemsid, result, formatDate(Date.now(), 'yyyy-MM-dd', 'en-GR'));
+          let res = await this.userService.updateItemName(itemsid, result, formatDate(Date.now(), 'yyyy-MM-dd', 'en-GR'),this.listname);
           if (res) {
             await this.getListItems();
           }
@@ -103,7 +103,7 @@ export class HomeItemsComponent implements OnInit {
       if (result != true) //update
       {
         try {
-          let res = await this.userService.addItem(this.listid, result);
+          let res = await this.userService.addItem(this.listid,this.listname, result);
           if (res) {
             await this.getListItems();
           }

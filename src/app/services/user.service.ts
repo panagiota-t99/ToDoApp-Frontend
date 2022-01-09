@@ -85,9 +85,9 @@ export class UserService {
     }
   }
 
-  async updateItemName(itemsid: any, itemname: any, dateModified: any): Promise<any> {
+  async updateItemName(itemsid: any, itemname: any, dateModified: any,listname: any): Promise<any> {
     try {
-      const res = await this.commonService.putRequest('lists/item', {itemsid, itemname, dateModified});
+      const res = await this.commonService.putRequest('lists/item', {itemsid, itemname, dateModified,listname});
       return res;
     } catch (e) {
       throw {message: 'Something went wrong when updating the item name :('};
@@ -121,9 +121,9 @@ export class UserService {
     }
   }
 
-  async addItem(id: any, itemname: any): Promise<any> {
+  async addItem(id: any,listname:any, itemname: any): Promise<any> {
     try {
-      const res = await this.commonService.postRequest('lists/list/item/add', {id, itemname});
+      const res = await this.commonService.postRequest('lists/list/item/add', {id,listname, itemname});
       return res;
     } catch (e) {
       throw {message: 'Please fill in the item name!'};
