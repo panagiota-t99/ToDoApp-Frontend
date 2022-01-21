@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
 
           const role = await this.userService.role();
           localStorage.setItem("role", role[0].roleid)
+          localStorage.setItem("role", role[0].userid)
 
           if (role[0].roleid == 1)
             await this.router.navigate(['home/admin']);
