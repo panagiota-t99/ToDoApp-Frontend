@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
       if (result === true) //delete
       {
         try {
-          let res = await this.userService.deleteList(listid);
+          let res = await this.userService.deleteList(listid,listname);
           if (res) {
             await this.getListsFunction();
           }

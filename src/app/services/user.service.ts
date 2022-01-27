@@ -94,18 +94,39 @@ export class UserService {
     }
   }
 
-  async deleteList(listid: any): Promise<any> {
+  async  addReminder(reminder: any, itemsid: any) {
     try {
-      const res = await this.commonService.deleteRequest('lists/list/' + listid);
+      await this.commonService.putRequest('lists/item/reminder', {
+        reminder,
+        itemsid,
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async  deleteReminder(itemsid: any) {
+    try {
+      return await this.commonService.putRequest('lists/list/item/delete/reminder', {
+        itemsid,
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async deleteList(listid: any, listname: any): Promise<any> {
+    try {
+      const res = await this.commonService.deleteRequest('lists/list/' + listid + '/' + listname);
       return res;
     } catch (e) {
       throw {message: 'Something went wrong when deleting the list :('};
     }
   }
 
-  async deleteItem(itemsid: any): Promise<any> {
+  async deleteItem(itemsid: any, itemname: any): Promise<any> {
     try {
-      const res = await this.commonService.deleteRequest('lists/list/item/' + itemsid);
+      const res = await this.commonService.deleteRequest('lists/list/item/' + itemsid + '/' + itemname);
       return res;
     } catch (e) {
       throw {message: 'Something went wrong when deleting the item :('};

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -6,6 +6,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogComponent} from "../dialog/dialog.component";
 import {DialogDeleteComponent} from "../dialog-delete/dialog-delete.component";
 import {formatDate} from "@angular/common";
+
+
 
 
 @Component({
@@ -36,6 +38,7 @@ export class HomeItemsComponent implements OnInit {
       const items = await this.userService.getItems(this.listid);
       if (items) {
         for (const item of items) {
+
           if (item.dateModified === null)
             item.dateModified = "-";
           else
@@ -47,6 +50,22 @@ export class HomeItemsComponent implements OnInit {
       }
     } catch ({message}) {
       alert(message);
+    }
+  }
+
+
+
+  async setReminder(event: any, element: ItemElement) {
+
+    element.reminder = event;
+
+    var date = new Date(element.reminder);
+    var addReminder = date.toISOString().split('T')[0] + ' ' + date.toString().split(' ')[4];
+
+    try {
+      await this.userService.addReminder(addReminder, element.itemsid)
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -65,7 +84,7 @@ export class HomeItemsComponent implements OnInit {
       if (result === true) //delete
       {
         try {
-          let res = await this.userService.deleteItem(itemsid);
+          let res = await this.userService.deleteItem(itemsid,itemname);
           if (res) {
             await this.getListItems();
           }
@@ -78,13 +97,20 @@ export class HomeItemsComponent implements OnInit {
 
 
   openDialogItem(itemsid: any, itemname: any) {
-    let dialogRef = this.dialog.open(DialogComponent, {data: {title: "Edit item name", name: itemname, action: "Update", disableClose: true}});
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: "Edit item name",
+        name: itemname,
+        action: "Update",
+        disableClose: true
+      }
+    });
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result != true) //closed by update
       {
         try {
-          let res = await this.userService.updateItemName(itemsid, result, formatDate(Date.now(), 'yyyy-MM-dd', 'en-GR'),this.listname);
+          let res = await this.userService.updateItemName(itemsid, result, formatDate(Date.now(), 'yyyy-MM-dd', 'en-GR'), this.listname);
           if (res) {
             await this.getListItems();
           }
@@ -97,13 +123,19 @@ export class HomeItemsComponent implements OnInit {
 
 
   openDialogAddItem() {
-    let dialogRef = this.dialog.open(DialogComponent, {data: {title: "Enter new item name", action: "Add", disableClose: true}});
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: "Enter new item name",
+        action: "Add",
+        disableClose: true
+      }
+    });
 
     dialogRef.afterClosed().subscribe(async result => {
       if (result != true) //update
       {
         try {
-          let res = await this.userService.addItem(this.listid,this.listname, result);
+          let res = await this.userService.addItem(this.listid, this.listname, result);
           if (res) {
             await this.getListItems();
           }
@@ -119,6 +151,32 @@ export class HomeItemsComponent implements OnInit {
     // @ts-ignore
     this.itemSource.filter = $event.target.value.toLowerCase().trim();
   }
+
+  openDialogDeleteReminder(itemsid: any) {
+
+    let dialogRef = this.dialog.open(DialogDeleteComponent,
+      {
+        data: {
+          title: "Delete reminder",
+          text: "Are you sure you want to delete this reminder ?",
+          disableClose: true
+        }
+      });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result === true) //delete
+      {
+        try {
+          let res = await this.userService.deleteReminder(itemsid);
+          if (res) {
+            await this.getListItems();
+          }
+        } catch ({message}) {
+          alert(message);
+        }
+      }
+    });
+  }
 }
 
 export interface ItemElement {
@@ -126,4 +184,5 @@ export interface ItemElement {
   itemname: string;
   dateCreated: string;
   dateModified: string;
+  reminder: string;
 }

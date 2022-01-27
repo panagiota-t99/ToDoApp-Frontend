@@ -32,6 +32,18 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
       <mat-cell *matCellDef="let element">
+        <mat-form-field style="width: 170px" floatLabel="never">
+          <input  matInput (ngModelChange)="setReminder($event,element)" [ngxMatDatetimePicker]="picker" placeholder="Set reminder"  [(ngModel)]="element.reminder">
+          <mat-datepicker-toggle  matSuffix [for]="$any(picker)" style="color: #287dff; margin-right: 10px"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #picker>
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+
+        <button  mat-icon-button aria-label="clear" color="accent"
+                 (click)="openDialogDeleteReminder(element.itemsid)">
+          <mat-icon>clear</mat-icon> </button>
+
         <button class="editbtn" mat-icon-button aria-label="edit" color="accent"
                 (click)="openDialogItem(element.itemsid,element.itemname)">
           <mat-icon>edit</mat-icon>
@@ -46,6 +58,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumnsItems sticky:true"></mat-header-row>
     <mat-row mat-row *matRowDef="let row; columns: displayedColumnsItems;" matRipple class="list-row"></mat-row>
   </mat-table>
+
   </div>
 
   <div class="card-container" fxLayout="column" fxHide fxShow.lt-md >
